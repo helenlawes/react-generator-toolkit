@@ -7,4 +7,4 @@ args
 
 const flags = args.parse(process.argv);
 
-console.log('---',flags)
+console.log('---',flags, args.sub)
