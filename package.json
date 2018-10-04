@@ -1,0 +1,19 @@
+{
+  "name": "react-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "rg": "./index.js",
+    "rg component": "./index-component.js",
+    "rg c": "./index-component.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "args": "^5.0.0"
+  }
+}
