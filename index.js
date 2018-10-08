@@ -6,13 +6,25 @@ const args = require('args'),
 
 const currentDir = process.cwd();
 
-const createFiles = (name, dir) => {
+const openFileReplace = async (path, replacement) => {
+	const fileContents = await fs.readFile(path, 'utf8');
+	return fileContents.replace(/Component/g, replacement);
+};
+
+const createFiles = async (name, dir) => {
 	const componentFile = path.resolve(currentDir, dir, `${name}/${name}.js`);
 	const storyFile = path.resolve(currentDir, dir, `${name}/${name}.story.js`);
 	const styleFile = path.resolve(currentDir, dir, `${name}/${name}.styles.js`);
-	fs.copy(`${__dirname}/templates/Component.js`, componentFile);
-	fs.copy(`${__dirname}/templates/Component.story.js`, storyFile);
-	fs.copy(`${__dirname}/templates/Component.styles.js`, styleFile);
+
+	let cfContents = await openFileReplace(`${__dirname}/templates/Component.js`, name);
+	fs.outputFileSync(componentFile, cfContents);
+
+	let storyContents = await openFileReplace(`${__dirname}/templates/Component.story.js`, name);
+	fs.outputFileSync(storyFile, storyContents);
+
+	let styleContents = await openFileReplace(`${__dirname}/templates/Component.styles.js`, name);
+	fs.outputFileSync(styleFile, styleContents);
+
 	/* eslint-disable no-console */
 	console.log('created component files:');
 	console.log(`* ${componentFile}`);
