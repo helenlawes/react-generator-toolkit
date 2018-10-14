@@ -8,13 +8,14 @@
   },
   "bin": {
     "rg": "./index.js",
-    "rg component": "./index-component.js",
-    "rg c": "./index-component.js"
+    "rg component": "./index.js",
+    "rg c": "./index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "args": "^5.0.0",
+    "download-git-repo": "^1.1.0",
     "fs-extra": "^7.0.0"
   }
 }

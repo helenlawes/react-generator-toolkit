@@ -38,7 +38,7 @@ const createFiles = async (name, dir, styles, story) => {
 };
 
 const component = (name, sub, options) => {
-	createFiles(sub[0], options.dir, parseBool(options.styles), parseBool(options.story));
+	createFiles(sub[0]||'Component', options.dir, parseBool(options.styles), parseBool(options.story));
 };
 
 const parseBool = value => value === 'true' ? true : false;
@@ -52,4 +52,23 @@ args
 	.command('component', 'Create a new react component', component, ['c']);
 
 
-args.parse(process.argv);
+const flags = args.parse(process.argv);
+
+if (Object.keys(flags).length !== 0) {
+	const dir = args.sub[0] || 'my-app';
+	const folder = path.resolve(currentDir, dir);
+	require('download-git-repo')('bitbucket:helen_lawes/minimal-react-boilerplate', folder, err => {
+		if (err) {
+			/* eslint-disable no-console */
+			console.error(err);
+			/* eslint-enable no-console */
+			process.exit();
+		}
+		/* eslint-disable no-console */
+		console.log(`Created new project in: ${folder}`);
+		console.log('\nBegin with:\n');
+		console.log(`cd ${dir}`);
+		console.log('npm install');
+		/* eslint-enable no-console */
+	});
+}
