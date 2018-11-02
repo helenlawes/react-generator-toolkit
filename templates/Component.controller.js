@@ -1,27 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import StyledComponent from './Component.styles';
+import Styled_COMPONENT_ from './_COMPONENT_.styles';
 
-class Component extends React.Component {
+class _COMPONENT_ extends React.Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
 		const { children } = this.props;
-		return (
-			<StyledComponent>{children}</StyledComponent>
-		);
+		return <Styled_COMPONENT_>{children}</Styled_COMPONENT_>;
 	}
 }
 
-Component.description = `
-	Component component
+_COMPONENT_.description = `
+	_COMPONENT_ component
 `;
 
-Component.propTypes = {
+_COMPONENT_.propTypes = {
 	children: PropTypes.node,
 };
 
-export default Component;
+export default _COMPONENT_;

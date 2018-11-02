@@ -1,12 +1,10 @@
 import React from 'react';
 import { storiesOf, withInfo } from '../../stories';
 
-import Component from './Component';
+import _COMPONENT_ from './_COMPONENT_';
 
-storiesOf('Component', module)
+storiesOf('_COMPONENT_', module)
 	.addDecorator((story, context) =>
-		withInfo(Component.description)(story)(context)
+		withInfo(_COMPONENT_.description)(story)(context),
 	)
-	.add('Default', () => (
-		<Component></Component>
-	));
+	.add('Default', () => <_COMPONENT_ />);

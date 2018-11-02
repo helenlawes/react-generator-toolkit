@@ -8,7 +8,7 @@ const currentDir = process.cwd();
 
 const openFileReplace = async (path, replacement) => {
 	const fileContents = await fs.readFile(path, 'utf8');
-	return fileContents.replace(/Component/g, replacement);
+	return fileContents.replace(/_COMPONENT_/g, replacement);
 };
 
 const component = async argv => {
