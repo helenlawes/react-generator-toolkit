@@ -1,6 +1,6 @@
 {
   "name": "react-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,13 +9,15 @@
   "bin": {
     "rg": "./index.js",
     "rg component": "./index.js",
-    "rg c": "./index.js"
+    "rg c": "./index.js",
+    "rg new": "./index.js",
+    "rg n": "./index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "args": "^5.0.0",
     "download-git-repo": "^1.1.0",
-    "fs-extra": "^7.0.0"
+    "fs-extra": "^7.0.0",
+    "yargs": "^12.0.2"
   }
 }
