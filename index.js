@@ -113,6 +113,9 @@ const generate = argv => {
 };
 
 yargs
+	.config('config')
+	.global('config')
+	.default('config', '.rg.json')
 	.command({
 		command: 'new [project]',
 		aliases: ['n'],
