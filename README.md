@@ -28,7 +28,7 @@ rg c Button
 | --dir (-d)                    | directory to output components (relative to base directory) | components       |
 | --spec-dir (--sd)             | directory to output specs (relative to base directory)      | specs/components |
 | --type (-t)                   | type of generated component                                 | functional       | 'functional', 'class' |
-| --no-styled-component (--nsb) | don't output styled-component file                          | false            |
+| --no-styled-component (--nsc) | don't output styled-component file                          | false            |
 | --no-storybook (--nsb)        | don't output storybook component file                       | false            |
 | --no-tests (--nt)             | don't output spec file                                      | false            |
 | --config                      | configuration file                                          | .rgrc.json       |
