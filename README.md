@@ -31,7 +31,7 @@ rg c Button
 | --no-styled-component (--nsb) | don't output styled-component file                          | false            |
 | --no-storybook (--nsb)        | don't output storybook component file                       | false            |
 | --no-tests (--nt)             | don't output spec file                                      | false            |
-| --config                      | configuration file                                          | .rg.json         |
+| --config                      | configuration file                                          | .rgrc.json       |
 
 ### Config file
 
