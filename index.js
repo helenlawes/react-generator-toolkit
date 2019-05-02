@@ -15,26 +15,32 @@ const openFileReplace = async (path, replacements) => {
 };
 
 const component = async argv => {
-	const { name, base, dir, specDir, nsb, nsc, t, nt } = argv;
+	const { name, base, dir, specDir, nsb, nsc, t, nt, l } = argv;
+	const fileExtJsx = l === 'js' ? 'js' : 'tsx';
 	const componentFile = path.resolve(
 		currentDir,
 		base,
 		dir,
-		`${name}/${name}.js`,
+		`${name}/${name}.${fileExtJsx}`,
 	);
 	const storyFile = path.resolve(
 		currentDir,
 		base,
 		dir,
-		`${name}/${name}.story.js`,
+		`${name}/${name}.story.${fileExtJsx}`,
 	);
 	const styleFile = path.resolve(
 		currentDir,
 		base,
 		dir,
-		`${name}/${name}.styles.js`,
+		`${name}/${name}.styles.${fileExtJsx}`,
 	);
-	const specFile = path.resolve(currentDir, base, specDir, `${name}Spec.js`);
+	const specFile = path.resolve(
+		currentDir,
+		base,
+		specDir,
+		`${name}Spec.${fileExtJsx}`,
+	);
 
 	const relativePath = path.posix.relative(
 		path.posix.resolve(currentDir, base, specDir),
@@ -48,7 +54,10 @@ const component = async argv => {
 		},
 	];
 
-	const fileName = t === 'class' ? 'Component.controller.js' : 'Component.js';
+	const fileName =
+		t === 'class'
+			? `Component.controller.${fileExtJsx}`
+			: `Component.${fileExtJsx}`;
 	const nscFolder = nsc ? 'nsc/' : '';
 	const cfContents = await openFileReplace(
 		`${__dirname}/templates/${nscFolder}${fileName}`,
@@ -58,7 +67,7 @@ const component = async argv => {
 
 	if (!nt) {
 		const specContents = await openFileReplace(
-			`${__dirname}/templates/ComponentSpec.js`,
+			`${__dirname}/templates/ComponentSpec.${fileExtJsx}`,
 			[...replacements, { find: /_PATH_/g, replace: relativePath }],
 		);
 		fs.outputFileSync(specFile, specContents);
@@ -66,7 +75,7 @@ const component = async argv => {
 
 	if (!nsb) {
 		const storyContents = await openFileReplace(
-			`${__dirname}/templates/Component.story.js`,
+			`${__dirname}/templates/Component.story.${fileExtJsx}`,
 			replacements,
 		);
 		fs.outputFileSync(storyFile, storyContents);
@@ -74,7 +83,7 @@ const component = async argv => {
 
 	if (!nsc) {
 		const styleContents = await openFileReplace(
-			`${__dirname}/templates/Component.styles.js`,
+			`${__dirname}/templates/Component.styles.${fileExtJsx}`,
 			replacements,
 		);
 		fs.outputFileSync(styleFile, styleContents);
@@ -172,6 +181,12 @@ yargs
 				.option('no-tests', {
 					alias: 'nt',
 					describe: 'don’t output spec file',
+				})
+				.option('language', {
+					alias: 'l',
+					describe: 'code language to use',
+					choices: ['js', 'typescript'],
+					default: 'js',
 				});
 		},
 		handler: component,

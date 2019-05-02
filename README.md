@@ -26,6 +26,7 @@ rg c Button
 | ----------------------------- | ----------------------------------------------------------- | ---------------- | --------------------- |
 | --base (-b)                   | react app base directory                                    | src              |
 | --dir (-d)                    | directory to output components (relative to base directory) | components       |
+| --language (-l)               | language to be used for components                          | js               | 'js', 'typescript'    |
 | --spec-dir (--sd)             | directory to output specs (relative to base directory)      | specs/components |
 | --type (-t)                   | type of generated component                                 | functional       | 'functional', 'class' |
 | --no-styled-component (--nsc) | don't output styled-component file                          | false            |
