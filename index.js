@@ -99,10 +99,14 @@ const component = async argv => {
 };
 
 const generate = argv => {
-	const { project } = argv;
+	const { project, l } = argv;
 	const folder = path.resolve(currentDir, project);
+	const repo =
+		l === 'js'
+			? 'minimal-react-boilerplate'
+			: 'minimal-react-typescript-boilerplate';
 	require('download-git-repo')(
-		'bitbucket:helen_lawes/minimal-react-boilerplate',
+		`bitbucket:helen_lawes/${repo}`,
 		folder,
 		err => {
 			if (err) {
@@ -130,10 +134,17 @@ yargs
 		aliases: ['n'],
 		desc: 'Create a new react project from boilerplate',
 		builder: yargs => {
-			yargs.positional('project', {
-				describe: 'project folder name',
-				default: 'my-app',
-			});
+			yargs
+				.positional('project', {
+					describe: 'project folder name',
+					default: 'my-app',
+				})
+				.option('language', {
+					alias: 'l',
+					describe: 'code language to use',
+					choices: ['js', 'typescript'],
+					default: 'js',
+				});
 		},
 		handler: generate,
 	})
