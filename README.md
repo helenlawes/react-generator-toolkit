@@ -1,9 +1,9 @@
 # React generator
 
-Clone git repo then run the following command:
+Install:
 
 ```
-npm install -g
+npm install -g react-generator-toolkit
 ```
 
 ## Create new project from boilerplate
