@@ -125,6 +125,71 @@ const generate = argv => {
 	);
 };
 
+const context = async argv => {
+	const { name, base, l } = argv;
+
+	const fileExtJsx = l === 'js' ? 'js' : 'tsx';
+	const providerFile = path.resolve(
+		currentDir,
+		base,
+		`${name}Context/${name}.${fileExtJsx}`,
+	);
+	const contextFile = path.resolve(
+		currentDir,
+		base,
+		`${name}Context/${name}Context.${fileExtJsx}`,
+	);
+	const withFile = path.resolve(
+		currentDir,
+		base,
+		`${name}Context/with${name}.${fileExtJsx}`,
+	);
+	const indexFile = path.resolve(
+		currentDir,
+		base,
+		`${name}Context/index.${fileExtJsx}`,
+	);
+
+	const replacements = [
+		{
+			find: /_NAME_/g,
+			replace: name,
+		},
+	];
+
+	const pfContents = await openFileReplace(
+		`${__dirname}/templates/context/Name.${fileExtJsx}`,
+		replacements,
+	);
+	fs.outputFileSync(providerFile, pfContents);
+
+	const cfContents = await openFileReplace(
+		`${__dirname}/templates/context/NameContext.${fileExtJsx}`,
+		replacements,
+	);
+	fs.outputFileSync(contextFile, cfContents);
+
+	const wfContents = await openFileReplace(
+		`${__dirname}/templates/context/withName.${fileExtJsx}`,
+		replacements,
+	);
+	fs.outputFileSync(withFile, wfContents);
+
+	const ifContents = await openFileReplace(
+		`${__dirname}/templates/context/index.${fileExtJsx}`,
+		replacements,
+	);
+	fs.outputFileSync(indexFile, ifContents);
+
+	/* eslint-disable no-console */
+	console.log('created component files:');
+	console.log(`* ${providerFile}`);
+	console.log(`* ${contextFile}`);
+	console.log(`* ${withFile}`);
+	console.log(`* ${indexFile}`);
+	/* eslint-enable no-console */
+};
+
 yargs
 	.config('config')
 	.global('config')
@@ -201,5 +266,28 @@ yargs
 				});
 		},
 		handler: component,
+	})
+	.command({
+		command: 'context [name]',
+		aliases: ['ctx'],
+		desc: 'Create a context api',
+		builder: yargs => {
+			yargs
+				.positional('name', {
+					describe: 'name of generated context',
+				})
+				.option('base', {
+					alias: 'b',
+					describe: 'react app base directory',
+					default: 'src',
+				})
+				.option('language', {
+					alias: 'l',
+					describe: 'code language to use',
+					choices: ['js', 'typescript'],
+					default: 'js',
+				});
+		},
+		handler: context,
 	})
 	.scriptName('rg').argv;

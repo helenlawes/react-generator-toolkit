@@ -9,6 +9,7 @@ npm install -g react-generator-toolkit
 ## Create new project from boilerplate
 
 ```
+rg new my-app
 rg n my-app
 ```
 
@@ -17,7 +18,15 @@ rg n my-app
 Create a React functional component with styled component and story book files
 
 ```
+rg create Button
 rg c Button
+```
+
+## Create context (Provider, Consumer, with HOC)
+
+```
+rg context Recipes
+rg ctx Recipes
 ```
 
 ### Options
