@@ -19,6 +19,7 @@ _COMPONENT_.description = `
 `;
 
 _COMPONENT_.propTypes = {
+	/** prop description */
 	children: PropTypes.node,
 };
 

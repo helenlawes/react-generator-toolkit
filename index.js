@@ -15,7 +15,7 @@ const openFileReplace = async (path, replacements) => {
 };
 
 const component = async argv => {
-	const { name, base, dir, specDir, nsb, nsc, t, nt, l } = argv;
+	const { name, base, dir, nsb, nsc, t, nt, l } = argv;
 	const fileExtJsx = l === 'js' ? 'js' : 'tsx';
 	const componentFile = path.resolve(
 		currentDir,
@@ -23,12 +23,7 @@ const component = async argv => {
 		dir,
 		`${name}/${name}.${fileExtJsx}`,
 	);
-	const storyFile = path.resolve(
-		currentDir,
-		base,
-		dir,
-		`${name}/${name}.story.${fileExtJsx}`,
-	);
+	const docFile = path.resolve(currentDir, base, dir, `${name}/${name}.mdx`);
 	const styleFile = path.resolve(
 		currentDir,
 		base,
@@ -38,7 +33,7 @@ const component = async argv => {
 	const specFile = path.resolve(
 		currentDir,
 		base,
-		specDir,
+		dir,
 		`${name}/${name}.test.${fileExtJsx}`,
 	);
 
@@ -69,11 +64,11 @@ const component = async argv => {
 	}
 
 	if (!nsb) {
-		const storyContents = await openFileReplace(
-			`${__dirname}/templates/Component.story.${fileExtJsx}`,
+		const docContents = await openFileReplace(
+			`${__dirname}/templates/Component.mdx`,
 			replacements,
 		);
-		fs.outputFileSync(storyFile, storyContents);
+		fs.outputFileSync(docFile, docContents);
 	}
 
 	if (!nsc) {
@@ -87,7 +82,7 @@ const component = async argv => {
 	/* eslint-disable no-console */
 	console.log('created component files:');
 	console.log(`* ${componentFile}`);
-	!nsb && console.log(`* ${storyFile}`);
+	!nsb && console.log(`* ${docFile}`);
 	!nsc && console.log(`* ${styleFile}`);
 	!nt && console.log(`* ${specFile}`);
 	/* eslint-enable no-console */
@@ -229,12 +224,6 @@ yargs
 						'directory to output components (relative to base directory)',
 					default: 'components',
 				})
-				.option('spec-dir', {
-					alias: 'sd',
-					describe:
-						'directory to output specs (relative to base directory)',
-					default: 'components',
-				})
 				.option('type', {
 					alias: 't',
 					describe: 'type of generated component',
@@ -245,9 +234,9 @@ yargs
 					alias: 'nsc',
 					describe: 'don’t output styled-component file',
 				})
-				.option('no-storybook', {
-					alias: 'nsb',
-					describe: 'don’t output storybook file',
+				.option('no-doc', {
+					alias: 'nsd',
+					describe: 'don’t output doc file',
 				})
 				.option('no-tests', {
 					alias: 'nt',

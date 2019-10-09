@@ -31,17 +31,16 @@ rg ctx Recipes
 
 ### Options
 
-| Option                        | Description                                                 | Default          | Choices               |
-| ----------------------------- | ----------------------------------------------------------- | ---------------- | --------------------- |
-| --base (-b)                   | react app base directory                                    | src              |
-| --dir (-d)                    | directory to output components (relative to base directory) | components       |
-| --language (-l)               | language to be used for components                          | js               | 'js', 'typescript'    |
-| --spec-dir (--sd)             | directory to output specs (relative to base directory)      | specs/components |
-| --type (-t)                   | type of generated component                                 | functional       | 'functional', 'class' |
-| --no-styled-component (--nsc) | don't output styled-component file                          | false            |
-| --no-storybook (--nsb)        | don't output storybook component file                       | false            |
-| --no-tests (--nt)             | don't output spec file                                      | false            |
-| --config                      | configuration file                                          | .rgrc.json       |
+| Option                        | Description                                                 | Default    | Choices               |
+| ----------------------------- | ----------------------------------------------------------- | ---------- | --------------------- |
+| --base (-b)                   | react app base directory                                    | src        |
+| --dir (-d)                    | directory to output components (relative to base directory) | components |
+| --language (-l)               | language to be used for components                          | js         | 'js', 'typescript'    |
+| --type (-t)                   | type of generated component                                 | functional | 'functional', 'class' |
+| --no-styled-component (--nsc) | don't output styled-component file                          | false      |
+| --no-docs (--nsd)             | don't output doc component file                             | false      |
+| --no-tests (--nt)             | don't output spec file                                      | false      |
+| --config                      | configuration file                                          | .rgrc.json |
 
 ### Config file
 
