@@ -39,12 +39,7 @@ const component = async argv => {
 		currentDir,
 		base,
 		specDir,
-		`${name}Spec.${fileExtJsx}`,
-	);
-
-	const relativePath = path.posix.relative(
-		path.posix.resolve(currentDir, base, specDir),
-		path.posix.resolve(currentDir, base, dir, `${name}`),
+		`${name}/${name}.test.${fileExtJsx}`,
 	);
 
 	const replacements = [
@@ -67,8 +62,8 @@ const component = async argv => {
 
 	if (!nt) {
 		const specContents = await openFileReplace(
-			`${__dirname}/templates/ComponentSpec.${fileExtJsx}`,
-			[...replacements, { find: /_PATH_/g, replace: relativePath }],
+			`${__dirname}/templates/Component.test.${fileExtJsx}`,
+			replacements,
 		);
 		fs.outputFileSync(specFile, specContents);
 	}
@@ -238,7 +233,7 @@ yargs
 					alias: 'sd',
 					describe:
 						'directory to output specs (relative to base directory)',
-					default: 'specs/components',
+					default: 'components',
 				})
 				.option('type', {
 					alias: 't',
